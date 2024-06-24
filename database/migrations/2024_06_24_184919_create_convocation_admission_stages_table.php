@@ -24,12 +24,13 @@ return new class extends Migration
             $table->uuid('created_by')->nullable();
             $table->uuid('deleted_by')->nullable();
 
-            $table->foreign('admission_stage_id')->references('id')->on('admission_stages');
-            $table->foreign('convocation_id')->references('id')->on('convocations');
+            $table->foreign('admission_stage_id')->references('id')->on('admission_stages')->onDelete('set null');
+            $table->foreign('convocation_id')->references('id')->on('convocations')->onDelete('set null');
         });
     }
 
-    /**
+    /**php artisan migrate:rollback
+
      * Reverse the migrations.
      */
     public function down(): void

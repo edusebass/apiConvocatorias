@@ -21,7 +21,7 @@ return new class extends Migration
             $table->uuid('created_by')->nullable();
             $table->uuid('deleted_by')->nullable();
 
-            $table->foreign('convocation_id')->references('id')->on('convocations');
+            $table->foreign('convocation_id')->references('id')->on('convocations')->onDelete('set null');
         });
     }
 

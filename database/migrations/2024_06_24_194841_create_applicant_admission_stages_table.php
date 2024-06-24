@@ -23,7 +23,7 @@ return new class extends Migration
             $table->uuid('created_by')->nullable();
             $table->uuid('deleted_by')->nullable();
 
-            $table->foreign('applicant_id')->references('id')->on('applicants');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('set null');
         });
     }
 
