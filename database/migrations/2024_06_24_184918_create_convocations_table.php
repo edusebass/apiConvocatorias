@@ -9,22 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('convocation_admission_stages', function (Blueprint $table) {
+        Schema::create('convocations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('admission_stage_id');
-            $table->uuid('convocation_id');
-            $table->tinyInteger('step');
+            $table->string('name');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->boolean('accept_foreigners');
+            $table->uuid('study_plan_id');
             $table->timestamps();
             $table->softDeletes();
             $table->uuid('updated_by')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('deleted_by')->nullable();
-
-            $table->foreign('admission_stage_id')->references('id')->on('admission_stages');
+            $table->string("prefix");
+            $table->integer('applicant_limit');
+            $table->uuid('cycle_id');
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('convocation_admission_stages');
+        Schema::dropIfExists('convocations');
     }
 };
